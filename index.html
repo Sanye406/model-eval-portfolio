@@ -1,0 +1,730 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>模型评测作品集 · AI Model Evaluation Portfolio</title>
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='6' fill='%23C0542C'/%3E%3Ctext x='16' y='22' font-size='16' text-anchor='middle' fill='%23FBF5E8' font-family='serif' font-weight='bold'%3E评%3C/text%3E%3C/svg%3E">
+<link rel="stylesheet" href="https://miaoda.feishu.cn/fonts/css2?family=Noto+Serif+SC:wght@600;700;900&family=Noto+Sans+SC:wght@400;500;700&display=swap">
+<style>
+/* ============ 设计token：复古工装手账本 · 咖色暖调 ============ */
+:root{
+  --paper:#F3E9D4;      /* 牛皮纸底 */
+  --paper2:#ECDDC0;     /* 深一档纸 */
+  --card:#FBF5E8;       /* 卡片米白 */
+  --ink:#35291D;        /* 深墨棕 */
+  --ink2:#6B5B45;       /* 次文字 */
+  --ink3:#8C7A60;       /* 弱文字 */
+  --orange:#C0542C;     /* 工装橙 */
+  --orange-d:#9C3F1E;
+  --green:#57683F;      /* 工装绿 */
+  --khaki:#C9B281;      /* 卡其线 */
+  --red:#A03D2F;        /* 警示红 */
+  --tape:rgba(224,194,118,.6);
+  --serif:"Noto Serif SC","Songti SC","SimSun",serif;
+  --sans:"Noto Sans SC","PingFang SC","Microsoft YaHei",sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{
+  font-family:var(--sans);
+  color:var(--ink);
+  background:
+    linear-gradient(rgba(201,178,129,.14) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201,178,129,.14) 1px, transparent 1px),
+    var(--paper);
+  background-size:26px 26px;
+  line-height:1.75;
+  -webkit-font-smoothing:antialiased;
+}
+/* ============ 通用 ============ */
+.wrap{max-width:1080px;margin:0 auto;padding:0 20px}
+.serif{font-family:var(--serif)}
+a{color:inherit}
+/* 胶带效果 */
+.tape{position:absolute;width:88px;height:26px;background:var(--tape);top:-12px;left:50%;transform:translateX(-50%) rotate(-2deg);box-shadow:0 1px 2px rgba(53,41,29,.12)}
+/* 标签贴纸 */
+.sticker{
+  display:inline-block;padding:4px 14px;font-size:12px;font-weight:700;color:#FBF5E8;
+  background:var(--orange);border-radius:2px;letter-spacing:.12em;
+  box-shadow:2px 2px 0 rgba(53,41,29,.18);
+}
+.sticker.green{background:var(--green)}
+/* 章节 */
+.chap{padding:56px 0 20px;position:relative}
+.chap-head{display:flex;align-items:flex-start;gap:16px;margin-bottom:28px;position:relative}
+.chap-no{
+  flex:none;width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-family:var(--serif);font-weight:900;font-size:22px;color:#FBF5E8;background:var(--orange);
+  border:3px solid var(--ink);box-shadow:3px 3px 0 rgba(53,41,29,.2);transform:rotate(-4deg);
+}
+.chap-no.g{background:var(--green)}
+.chap-head h2{font-family:var(--serif);font-size:26px;font-weight:900;line-height:1.3}
+.chap-head .sub{font-size:14px;color:var(--ink2);margin-top:4px}
+.chap-divider{height:3px;border-top:2px dashed var(--khaki);margin:34px 0 0}
+/* 卡片 */
+.cards{display:grid;grid-template-columns:1fr;gap:16px}
+.card{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:20px;box-shadow:3px 3px 0 rgba(53,41,29,.08)}
+.card h3{font-family:var(--serif);font-size:17px;font-weight:700;margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.card p{font-size:13.5px;color:var(--ink2)}
+/* ============ Hero ============ */
+.hero{position:relative;padding:72px 0 40px;overflow:hidden}
+.hero::before{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse at 85% 10%, rgba(192,84,44,.10), transparent 55%);
+}
+.hero-inner{position:relative}
+.hero .kicker{display:inline-block;font-size:13px;font-weight:700;color:var(--orange-d);border:1.5px solid var(--orange);padding:3px 12px;border-radius:20px;letter-spacing:.1em;margin-bottom:18px}
+.hero h1{font-family:var(--serif);font-size:44px;font-weight:900;line-height:1.15;letter-spacing:.02em}
+.hero h1 em{font-style:normal;color:var(--orange)}
+.hero .subline{margin-top:12px;font-size:16px;color:var(--ink2)}
+.hero .subline b{color:var(--ink)}
+.hero-tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:22px}
+.hero-tags span{
+  font-size:13px;font-weight:500;color:var(--ink);background:var(--card);
+  border:1px solid var(--khaki);border-radius:4px;padding:5px 12px;
+  box-shadow:2px 2px 0 rgba(53,41,29,.1);transform:rotate(var(--r,0deg));
+}
+.hero-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;margin-top:30px}
+.stat{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:16px;text-align:center;box-shadow:3px 3px 0 rgba(53,41,29,.1)}
+.stat .num{font-family:var(--serif);font-size:30px;font-weight:900;color:var(--orange);line-height:1.1}
+.stat .num.g{color:var(--green)}
+.stat .lbl{font-size:12.5px;color:var(--ink2);margin-top:4px}
+.hero-contact{display:flex;flex-wrap:wrap;gap:8px 22px;margin-top:26px;font-size:14px;color:var(--ink2)}
+.hero-contact .c{display:inline-flex;align-items:center;gap:6px}
+.hero-contact svg{width:15px;height:15px;flex:none;stroke:var(--orange-d);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+/* ============ 导航 ============ */
+.nav{
+  position:sticky;top:0;z-index:50;background:rgba(243,233,212,.94);backdrop-filter:blur(6px);
+  border-top:2px solid var(--ink);border-bottom:2px solid var(--ink);
+}
+.nav-inner{display:flex;gap:4px;overflow-x:auto;padding:8px 0;scrollbar-width:none}
+.nav-inner::-webkit-scrollbar{display:none}
+.nav a{
+  flex:none;font-size:13px;font-weight:700;color:var(--ink);text-decoration:none;
+  padding:6px 12px;border:1.5px solid var(--ink);border-radius:4px;background:var(--card);
+  transition:background .15s,color .15s;
+}
+.nav a:hover{background:var(--orange);color:#FBF5E8}
+/* ============ 01 定位 ============ */
+.posi-grid{display:grid;grid-template-columns:1fr;gap:16px}
+.posi-lead{
+  position:relative;background:var(--ink);color:#F5ECDA;border-radius:6px;padding:26px;margin-bottom:16px;
+  box-shadow:4px 4px 0 rgba(53,41,29,.25);
+}
+.posi-lead .quote{font-family:var(--serif);font-size:20px;font-weight:700;line-height:1.7}
+.posi-lead .quote b{color:#E8B04B}
+.posi-lead .who{margin-top:10px;font-size:13.5px;color:#CBBFA9}
+.pill-grid{display:grid;grid-template-columns:1fr;gap:14px}
+.pill{display:flex;gap:12px;align-items:flex-start;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:16px;box-shadow:2px 2px 0 rgba(53,41,29,.08)}
+.pill .ic{flex:none;width:38px;height:38px;border-radius:50%;background:var(--paper2);border:1.5px solid var(--khaki);display:flex;align-items:center;justify-content:center}
+.pill .ic svg{width:20px;height:20px;stroke:var(--orange-d);fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.pill h4{font-family:var(--serif);font-size:15.5px;font-weight:700}
+.pill p{font-size:13px;color:var(--ink2);margin-top:2px}
+/* ============ 02 指标 ============ */
+.metrics{display:grid;grid-template-columns:1fr;gap:16px}
+.metric{position:relative;background:var(--card);border:1px solid var(--khaki);border-left:5px solid var(--orange);border-radius:6px;padding:18px 18px 16px;box-shadow:3px 3px 0 rgba(53,41,29,.08)}
+.metric .tag{font-size:12px;font-weight:700;color:var(--orange-d);letter-spacing:.08em}
+.metric h3{font-family:var(--serif);font-size:18px;font-weight:900;margin:2px 0 6px}
+.metric .def{font-size:13.5px;color:var(--ink2)}
+.metric .rule{font-size:12.5px;color:var(--ink2);background:var(--paper2);border-radius:4px;padding:8px 10px;margin-top:10px}
+.metric .rule b{color:var(--ink)}
+.note-line{margin-top:16px;font-size:13px;color:var(--ink2);background:var(--paper2);border-left:3px solid var(--green);padding:10px 14px;border-radius:0 4px 4px 0}
+/* ============ 03 框架 ============ */
+.flow{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:22px 16px;margin-bottom:18px;box-shadow:3px 3px 0 rgba(53,41,29,.08)}
+.flow-title{font-family:var(--serif);font-weight:900;font-size:16px;text-align:center;margin-bottom:16px}
+.flow-steps{display:flex;flex-direction:column;gap:0}
+.flow-step{display:flex;gap:10px;align-items:stretch}
+.flow-step .dot{flex:none;width:30px;display:flex;flex-direction:column;align-items:center}
+.flow-step .dot i{width:22px;height:22px;border-radius:50%;background:var(--green);color:#FBF5E8;font-size:11px;font-style:normal;font-weight:700;display:flex;align-items:center;justify-content:center;flex:none}
+.flow-step .dot b{width:2px;flex:1;background:var(--khaki)}
+.flow-step:last-child .dot b{display:none}
+.flow-step .txt{font-size:13.5px;padding-bottom:14px}
+.flow-step .txt b{font-family:var(--serif);font-size:14.5px}
+.flow-step .txt span{color:var(--ink2);font-size:12.5px;display:block}
+.levels{display:grid;grid-template-columns:1fr;gap:14px}
+.level{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:18px;box-shadow:3px 3px 0 rgba(53,41,29,.08)}
+.level .lv{font-family:var(--serif);font-size:13px;font-weight:900;letter-spacing:.1em}
+.level .lv.l1{color:var(--green)}
+.level .lv.l2{color:var(--orange)}
+.level .lv.l3{color:var(--red)}
+.level h4{font-family:var(--serif);font-size:16px;font-weight:900;margin:4px 0 4px}
+.level p{font-size:13px;color:var(--ink2)}
+.principle{margin-top:16px;text-align:center;font-family:var(--serif);font-size:15px;font-weight:700;background:var(--paper2);border:1px dashed var(--khaki);border-radius:6px;padding:12px}
+/* ============ 04 标准与数据 ============ */
+.chain{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:18px}
+.chain span{font-size:12.5px;background:var(--card);border:1px solid var(--khaki);border-radius:4px;padding:4px 10px;font-weight:600}
+.chain .ar{color:var(--orange-d);font-weight:900}
+.tri{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:18px}
+.tri .t{background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:14px;box-shadow:2px 2px 0 rgba(53,41,29,.08)}
+.tri .t b{font-family:var(--serif);font-size:15px}
+.tri .t p{font-size:12.5px;color:var(--ink2);margin-top:3px}
+.grade-table{width:100%;border-collapse:collapse;background:var(--card);border:1px solid var(--khaki);border-radius:6px;overflow:hidden;margin-bottom:18px;table-layout:fixed}
+.grade-table th,.grade-table td{border:1px solid var(--khaki);padding:9px 10px;font-size:12.5px;text-align:center;vertical-align:middle}
+.grade-table th{background:var(--ink);color:#F5ECDA;font-weight:700}
+.grade-table td:first-child{font-weight:700;text-align:left}
+.gold{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:20px;box-shadow:3px 3px 0 rgba(53,41,29,.08)}
+.gold h4{font-family:var(--serif);font-size:16px;font-weight:900;margin-bottom:6px}
+.gold p{font-size:13px;color:var(--ink2);margin-bottom:10px}
+.bounds{display:grid;grid-template-columns:1fr;gap:10px}
+.bound{background:var(--paper2);border:1px dashed var(--khaki);border-radius:4px;padding:10px 12px;font-size:13px}
+.bound b{color:var(--ink);font-family:var(--serif)}
+/* ============ 05 Agent ============ */
+.precheck{background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:18px;margin-bottom:16px;box-shadow:3px 3px 0 rgba(53,41,29,.08)}
+.precheck ol{margin:8px 0 0 18px;font-size:13px;color:var(--ink2)}
+.precheck li{margin-bottom:4px}
+.arch{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+.arch .a{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:14px;box-shadow:2px 2px 0 rgba(53,41,29,.08)}
+.arch .a .no{font-family:var(--serif);font-weight:900;color:var(--orange-d);font-size:13px}
+.arch .a h5{font-family:var(--serif);font-size:15px;font-weight:900;margin:2px 0 3px}
+.arch .a p{font-size:12.5px;color:var(--ink2)}
+.result-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.result{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:14px;text-align:center;box-shadow:2px 2px 0 rgba(53,41,29,.08)}
+.result .n{font-family:var(--serif);font-size:24px;font-weight:900;color:var(--green)}
+.result .n.o{color:var(--orange)}
+.result .l{font-size:12px;color:var(--ink2);margin-top:2px}
+/* ============ 06 实战 ============ */
+.case{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:22px;box-shadow:4px 4px 0 rgba(53,41,29,.1)}
+.case-head{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin-bottom:12px}
+.case-head .who{font-size:12px;color:var(--ink3)}
+.case-steps{display:flex;flex-direction:column;gap:0;margin-top:8px}
+.case-step{display:flex;gap:12px}
+.case-step .n{flex:none;width:30px;height:30px;border-radius:50%;background:var(--green);color:#FBF5E8;font-family:var(--serif);font-weight:900;font-size:14px;display:flex;align-items:center;justify-content:center;margin-top:2px}
+.case-step .n.o{background:var(--orange)}
+.case-step .n.r{background:var(--red)}
+.case-step .tx{padding-bottom:16px;font-size:13.5px}
+.case-step .tx b{font-family:var(--serif);font-size:14.5px}
+.case-step .tx span{color:var(--ink2);font-size:12.5px;display:block}
+.case-big{display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-top:6px}
+.case-big .b{background:var(--paper2);border-radius:6px;padding:14px;text-align:center}
+.case-big .b .n{font-family:var(--serif);font-size:26px;font-weight:900;color:var(--green)}
+.case-big .b .n.o{color:var(--orange)}
+.case-big .b .l{font-size:12px;color:var(--ink2)}
+/* ============ 07 对标 ============ */
+.xpert{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:22px;box-shadow:3px 3px 0 rgba(53,41,29,.08)}
+.xpert .who{font-size:12px;color:var(--ink3);margin-bottom:10px}
+.xpert-grid{display:grid;grid-template-columns:1fr;gap:12px}
+.xp{background:var(--paper2);border:1px dashed var(--khaki);border-radius:6px;padding:14px}
+.xp h5{font-family:var(--serif);font-size:15px;font-weight:900;margin-bottom:4px}
+.xp p{font-size:12.5px;color:var(--ink2)}
+.score-line{display:grid;grid-template-columns:1fr;gap:8px;margin-top:14px}
+.score{display:flex;align-items:center;gap:10px;font-size:12.5px}
+.score .lab{flex:none;width:88px;font-weight:600}
+.score .bar{flex:1;height:14px;background:var(--paper2);border:1px solid var(--khaki);border-radius:3px;overflow:hidden}
+.score .bar i{display:block;height:100%;background:var(--orange);border-radius:2px}
+.score .val{flex:none;width:34px;text-align:right;font-weight:700}
+/* ============ 08 成效 ============ */
+.timeline{display:grid;grid-template-columns:92px 26px 1fr;gap:0;margin-bottom:20px}
+@media (max-width:560px){.timeline{grid-template-columns:76px 24px 1fr}}
+.tl-item{display:contents}
+.tl-item .t{direction:rtl;text-align:right;padding:0 12px 18px 0;font-size:12.5px;color:var(--ink2);font-weight:700}
+.tl-item .line{display:flex;flex-direction:column;align-items:center;padding-bottom:18px}
+.tl-item .line i{width:14px;height:14px;border-radius:50%;background:var(--orange);border:2px solid var(--card);box-shadow:0 0 0 2px var(--orange);flex:none}
+.tl-item .line b{width:2px;flex:1;background:var(--khaki)}
+.tl-item:last-child .line b{display:none}
+.tl-item .c{padding:0 0 18px 12px;font-size:13px}
+.tl-item .c b{font-family:var(--serif);font-size:14.5px}
+.tl-item .c span{color:var(--ink2);font-size:12.5px;display:block}
+.cost-compare{display:grid;grid-template-columns:1fr;gap:12px;margin-bottom:16px}
+.cc{background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:16px;box-shadow:2px 2px 0 rgba(53,41,29,.08)}
+.cc .who{font-size:12px;color:var(--ink3)}
+.cc .big{font-family:var(--serif);font-size:26px;font-weight:900;color:var(--ink)}
+.cc .big.o{color:var(--orange)}
+.cc .big.g{color:var(--green)}
+.cc .big small{font-size:13px;font-weight:700;color:var(--ink2)}
+.cc p{font-size:12.5px;color:var(--ink2);margin-top:4px}
+.six{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.six .s{position:relative;background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:14px;box-shadow:2px 2px 0 rgba(53,41,29,.08)}
+.six .s .k{font-family:var(--serif);font-weight:900;font-size:15px;color:var(--orange-d)}
+.six .s p{font-size:12px;color:var(--ink2);margin-top:2px}
+/* ============ 09 能力 ============ */
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:18px}
+.skills span{font-size:13px;font-weight:600;background:var(--card);border:1.5px solid var(--ink);border-radius:4px;padding:6px 14px;box-shadow:2px 2px 0 rgba(53,41,29,.15)}
+.skill-group{display:grid;grid-template-columns:1fr;gap:12px}
+.sg{background:var(--card);border:1px solid var(--khaki);border-radius:6px;padding:16px;box-shadow:2px 2px 0 rgba(53,41,29,.08)}
+.sg h5{font-family:var(--serif);font-size:15px;font-weight:900;margin-bottom:6px;color:var(--orange-d)}
+.sg p{font-size:13px;color:var(--ink2)}
+/* ============ Footer ============ */
+footer{margin-top:56px;background:var(--ink);color:#D9CCB2;padding:36px 0 40px}
+.foot-inner{max-width:1080px;margin:0 auto;padding:0 20px;text-align:center}
+.foot-inner .line{font-family:var(--serif);font-size:20px;font-weight:900;color:#F5ECDA;margin-bottom:12px}
+.foot-inner .contacts{display:flex;flex-wrap:wrap;justify-content:center;gap:8px 24px;font-size:14px;margin-bottom:14px}
+.foot-inner .contacts span{display:inline-flex;align-items:center;gap:6px}
+.foot-inner .contacts svg{width:15px;height:15px;stroke:#E8B04B;fill:none;stroke-width:2;stroke-linecap:round;stroke-linejoin:round}
+.foot-inner .tail{font-size:12.5px;color:#A99A80}
+/* 滚动显示 */
+.rv{opacity:0;transform:translateY(14px);transition:opacity .5s ease,transform .5s ease}
+.rv.on{opacity:1;transform:none}
+/* ============ 响应式 ============ */
+@media (min-width:560px){
+  .hero-stats{grid-template-columns:repeat(4,1fr)}
+  .cards{grid-template-columns:repeat(2,1fr)}
+  .result-grid{grid-template-columns:repeat(4,1fr)}
+  .case-big{grid-template-columns:repeat(4,1fr)}
+  .six{grid-template-columns:repeat(3,1fr)}
+  .posi-grid{grid-template-columns:1fr 1fr}
+  .skill-group{grid-template-columns:repeat(2,1fr)}
+}
+@media (max-width:559px){
+  .stat{overflow-wrap:break-word}
+  .stat .num{font-size:18px;overflow-wrap:break-word}
+  .stat .lbl{font-size:11.5px;overflow-wrap:break-word}
+  .hero-contact .c{overflow-wrap:anywhere}
+  .hero h1{font-size:34px}
+  .chap-head h2{font-size:22px}
+}
+@media (min-width:860px){
+  .metrics{grid-template-columns:repeat(2,1fr)}
+  .levels{grid-template-columns:repeat(3,1fr)}
+  .tri{grid-template-columns:repeat(3,1fr)}
+  .bounds{grid-template-columns:repeat(2,1fr)}
+  .arch{grid-template-columns:repeat(2,1fr)}
+  .xpert-grid{grid-template-columns:repeat(3,1fr)}
+  .cost-compare{grid-template-columns:repeat(3,1fr)}
+  .hero h1{font-size:56px}
+}
+@media (prefers-reduced-motion:reduce){
+  .rv{opacity:1;transform:none;transition:none}
+  html{scroll-behavior:auto}
+}
+</style>
+</head>
+<body>
+
+<!-- ===== 视图：Hero ===== -->
+<header class="hero">
+  <div class="wrap hero-inner">
+    <span class="kicker">作品集 · AI 模型评测方向</span>
+    <h1>模型评测<em>作品集</em></h1>
+    <p class="subline"><b>2027届 · 软件工程（211）</b>｜以评测为方法，以产品为视角，用数据驱动大模型从“能用”到“好用”</p>
+    <div class="hero-tags">
+      <span style="--r:-1.5deg">评测体系搭建</span>
+      <span style="--r:1deg">Badcase 归因</span>
+      <span style="--r:-.8deg">自动化评测 Agent</span>
+      <span style="--r:1.2deg">Gold Set 标准数据集</span>
+      <span style="--r:-1deg">量化驱动迭代</span>
+    </div>
+    <div class="hero-stats">
+      <div class="stat"><div class="num">60+</div><div class="lbl">专项评测报告输出</div></div>
+      <div class="stat"><div class="num g">75%</div><div class="lbl">人工评测工作量降低</div></div>
+      <div class="stat"><div class="num">4x</div><div class="lbl">评测效率提升</div></div>
+      <div class="stat"><div class="num g">50%→93.3%</div><div class="lbl">AI 定制成功率提升</div></div>
+    </div>
+    <div class="hero-contact">
+      <span class="c"><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 6l8 7 8-7"/></svg>18199157634</span>
+      <span class="c"><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>ruonan_xie@163.com</span>
+      <span class="c"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14 0 18-3-4-3-14.5 0-18z"/></svg>bugjun.cloud</span>
+    </div>
+  </div>
+</header>
+
+<!-- ===== 导航 ===== -->
+<nav class="nav">
+  <div class="wrap nav-inner">
+    <a href="#c01">01 定位</a>
+    <a href="#c02">02 方法论</a>
+    <a href="#c03">03 框架</a>
+    <a href="#c04">04 标准与数据</a>
+    <a href="#c05">05 评测 Agent</a>
+    <a href="#c06">06 实战</a>
+    <a href="#c07">07 多模型对标</a>
+    <a href="#c08">08 成效</a>
+    <a href="#c09">09 能力</a>
+  </div>
+</nav>
+
+<!-- ===== 章节01 定位 ===== -->
+<section class="chap" id="c01">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no">01</span>
+      <div>
+        <h2>我在做什么</h2>
+        <div class="sub">一份从评测执行走向评测产品化的工作记录</div>
+      </div>
+    </div>
+    <div class="posi-lead">
+      <div class="quote">我相信，<b>评测不是模型的终点，而是产品迭代的起点</b>。把评测标准做成可执行、可复用的体系，让每一次 Badcase 都成为下一次更好的输入。</div>
+      <div class="who">1 年大模型评测与产品化经验 · 横跨 B 端业务评测、自动化工具落地、多模型对标</div>
+    </div>
+    <div class="posi-grid">
+      <div class="pill-grid">
+        <div class="pill">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 19V5m0 14h16M8 15l4-6 4 3 4-7"/></svg></div>
+          <div><h4>评测体系设计</h4><p>定义指标、标准与验收口径，让人工与机器共用同一把尺</p></div>
+        </div>
+        <div class="pill">
+          <div class="ic"><svg viewBox="0 0 24 24"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.5-4.5"/><path d="M8 11h6M11 8v6"/></svg></div>
+          <div><h4>Badcase 归因</h4><p>对失败案例分类归因，定位根因并输出可落地的优化策略</p></div>
+        </div>
+      </div>
+      <div class="pill-grid">
+        <div class="pill">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 8l8-5 8 5-8 5z"/><path d="M4 8v8l8 5 8-5V8"/></svg></div>
+          <div><h4>自动化工具化</h4><p>把评测标准转化为 Skill 与 Agent，千级数据自动质检、报告一键生成</p></div>
+        </div>
+        <div class="pill">
+          <div class="ic"><svg viewBox="0 0 24 24"><path d="M4 4v16h16"/><path d="M7 14l4-6 4 3 5-7"/></svg></div>
+          <div><h4>数据闭环</h4><p>评测-分析-反馈-迭代，让每一轮评测都沉淀为下一轮的能力</p></div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节02 方法论 ===== -->
+<section class="chap" id="c02">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no g">02</span>
+      <div>
+        <h2>方法论：五维质量指标体系</h2>
+        <div class="sub">同一把尺子，同时度量模型输出的质量与业务价值</div>
+      </div>
+    </div>
+    <div class="metrics">
+      <div class="metric">
+        <div class="tag">CORRELATION</div>
+        <h3>重测信度</h3>
+        <p class="def">同一原始输入下，多条模型输出结论之间的一致性程度。</p>
+        <div class="rule"><b>判断标准：</b>以语义核心含义对齐为依据，不强制字面相同；多条输出可一致犯错，一致性不受事实对错影响。<b>统计：</b>踩分点计数。</div>
+      </div>
+      <div class="metric">
+        <div class="tag">FACTUALITY</div>
+        <h3>事实准确性</h3>
+        <p class="def">输出与原文的匹配程度，不编造、不篡改、不歪曲。</p>
+        <div class="rule"><b>判断标准：</b>引用信息可溯源原文；区分“同向克制延伸”与“质变式过度解读”。<b>统计：</b>踩分点计数。</div>
+      </div>
+      <div class="metric">
+        <div class="tag">EXPLAINABILITY</div>
+        <h3>可解释性</h3>
+        <p class="def">输出结构清晰，推理链路可追溯，读者能看懂结论从何而来。</p>
+        <div class="rule"><b>判断标准：</b>结论与支撑依据对应，关键分析有原文支撑，无突兀结论。<b>统计：</b>5 分制。</div>
+      </div>
+      <div class="metric">
+        <div class="tag">DEPTH</div>
+        <h3>分析深度</h3>
+        <p class="def">是否完成有效信息提炼，多角度、双向看待问题。</p>
+        <div class="rule"><b>判断标准：</b>提炼核心矛盾与多方立场，不做浅层复述与片面判断。<b>统计：</b>5 分制。</div>
+      </div>
+      <div class="metric">
+        <div class="tag">USABILITY</div>
+        <h3>业务可用性</h3>
+        <p class="def">产出结论、建议对下游业务是否具备实操价值。</p>
+        <div class="rule"><b>判断标准：</b>建议具体可落地、贴合业务场景，不产空泛套话。<b>统计：</b>5 分制。</div>
+      </div>
+      <div class="metric">
+        <div class="tag">TWO TRACKS</div>
+        <h3>双轨统计口径</h3>
+        <p class="def">不同性质的指标用不同的统计方式，避免“一张表打天下”。</p>
+        <div class="rule"><b>重测信度 / 事实准确性：</b>踩分点计数（对错可枚举）。<b>可解释性 / 分析深度 / 业务可用性：</b>5 分制评分（需语义判断）。</div>
+      </div>
+    </div>
+    <div class="note-line"><b>设计要点：</b>每一维都同时给出“判断依据、正误边界、典型错误场景”，让人工评审与机器评测共用同一套可执行标尺——这是自动化能成立的前提。</div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节03 框架 ===== -->
+<section class="chap" id="c03">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no">03</span>
+      <div>
+        <h2>分层自动化评测框架</h2>
+        <div class="sub">机器发现问题，人工确认问题，数据验证机器</div>
+      </div>
+    </div>
+    <div class="flow">
+      <span class="tape"></span>
+      <div class="flow-title">自动化评测总体链路</div>
+      <div class="flow-steps">
+        <div class="flow-step"><div class="dot"><i>1</i><b></b></div><div class="txt"><b>模型生成输出</b><span>原始评测对象</span></div></div>
+        <div class="flow-step"><div class="dot"><i>2</i><b></b></div><div class="txt"><b>基础规则检测</b><span>格式、字段、实体等确定性规则</span></div></div>
+        <div class="flow-step"><div class="dot"><i>3</i><b></b></div><div class="txt"><b>LLM 自动质量评测</b><span>语义级评分与判断</span></div></div>
+        <div class="flow-step"><div class="dot"><i>4</i><b></b></div><div class="txt"><b>异常问题识别分类</b><span>风险分级，标记待复核样本</span></div></div>
+        <div class="flow-step"><div class="dot"><i>5</i><b></b></div><div class="txt"><b>人工复核</b><span>复杂 / 疑似 / 边界问题</span></div></div>
+        <div class="flow-step"><div class="dot"><i>6</i><b></b></div><div class="txt"><b>沉淀数据集与错误案例</b><span>反馈回流，扩充标准库</span></div></div>
+        <div class="flow-step"><div class="dot"><i>7</i><b></b></div><div class="txt"><b>评测标准迭代 · 验证 · 扩大覆盖</b><span>持续闭环，扩大自动化范围</span></div></div>
+      </div>
+    </div>
+    <div class="levels">
+      <div class="level">
+        <div class="lv l1">LEVEL 1</div>
+        <h4>规则检测</h4>
+        <p>明确、重复、规则化的问题（格式 / 字段 / 实体 / 时间戳），由程序直接判断，零人工成本。</p>
+      </div>
+      <div class="level">
+        <div class="lv l2">LEVEL 2</div>
+        <h4>AI 辅助评测</h4>
+        <p>有标准但需要语义理解的问题，LLM Judge 全量初判，AI 评测 + 人工复核双轨保障。</p>
+      </div>
+      <div class="level">
+        <div class="lv l3">LEVEL 3</div>
+        <h4>人工判断</h4>
+        <p>复杂、边界、高风险问题，交由人工终审，人工资源只集中在高价值判断上。</p>
+      </div>
+    </div>
+    <div class="principle">核心原则：机器负责“发现问题”，人工负责“确认问题”，数据负责“验证机器”。</div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节04 标准与数据 ===== -->
+<section class="chap" id="c04">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no g">04</span>
+      <div>
+        <h2>评测标准与 Gold Set 标准数据集</h2>
+        <div class="sub">自动化的基础不是智能代理，而是可执行、可落地的评测标准</div>
+      </div>
+    </div>
+    <div class="chain">
+      <span>错误案例</span><span class="ar">→</span>
+      <span>归类错误类型</span><span class="ar">→</span>
+      <span>拆解可落地判断条件</span><span class="ar">→</span>
+      <span>是否可程序判断</span><span class="ar">→</span>
+      <span>是否可 LLM 判断</span><span class="ar">→</span>
+      <span>确定自动化方式</span>
+    </div>
+    <div class="tri">
+      <div class="t"><b>判定标准清晰度</b><p>对错条件是否明确、错误样例可否枚举、边界是否清晰</p></div>
+      <div class="t"><b>语义推理依赖</b><p>仅格式 / 实体匹配，还是需要上下文理解与复杂推理</p></div>
+      <div class="t"><b>人工评审一致率</b><p>双人独立评审的分歧度，判断标准是否稳定客观</p></div>
+    </div>
+    <table class="grade-table">
+      <colgroup><col style="width:34%"><col style="width:22%"><col style="width:22%"><col style="width:22%"></colgroup>
+      <tr><th>自动化等级</th><th>判定方式</th><th>人工角色</th><th>典型场景</th></tr>
+      <tr><td>完全自动化</td><td>机器直接判断</td><td>无</td><td>时间、目标达成度</td></tr>
+      <tr><td>AI 评测 + 人工复核</td><td>AI 全量判断</td><td>抽检 / 异常复核</td><td>内容总结、访谈概要</td></tr>
+      <tr><td>AI 辅助评测</td><td>AI 提供证据与初判</td><td>最终判断</td><td>言外之意、共识分歧</td></tr>
+      <tr><td>人工评测</td><td>人工完成</td><td>全量</td><td>画像洞察、核心特质</td></tr>
+    </table>
+    <div class="gold">
+      <h4>Gold Set：标准数据集的建立</h4>
+      <p>解决核心问题——如何验证 AI 评测判断是否可靠。由高质量正确案例、已确认错误案例、典型边界案例构成，全部附人工终审结论，用于计算 Precision、Recall、F1 与人工判断一致率。采用双人独立标注 + 专家仲裁机制，样本规模结合场景覆盖度、错误类型覆盖度与置信度共同确定。</p>
+      <div class="bounds">
+        <div class="bound"><b>任务边界</b>：划定回答是否落在问题要求范围内</div>
+        <div class="bound"><b>核心语义</b>：判定必须回答的关键元素是否覆盖</div>
+        <div class="bound"><b>可接受变体</b>：语义一致性可接受的其他表述范围</div>
+        <div class="bound"><b>事实边界</b>：可合理概括，但不得引入原文不支持的</div>
+        <div class="bound"><b>质量边界</b>：区分“回答正确但不合格”的低质量输出</div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节05 评测 Agent ===== -->
+<section class="chap" id="c05">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no">05</span>
+      <div>
+        <h2>自动化评测 Agent</h2>
+        <div class="sub">作品：数据标注 Skill + Prompt 诊断 Agent（B 端模型评测自动化工作流）</div>
+      </div>
+    </div>
+    <div class="precheck">
+      <h4>Agent 不是自动化评测的起点，而是体系跑通后的上层封装</h4>
+      <ol>
+        <li>评测标准体系稳定：五维指标、子业务维度、错误类型库定稿</li>
+        <li>高频错误模式充分归类，规则库完成多轮迭代验证</li>
+        <li>积累规模充足、质量可靠的 Gold Set 标准数据集</li>
+        <li>规则检测、LLM Judge 模块单独验证达标，效果指标合格</li>
+        <li>试点数据已验证明确的人效 / 成本收益，足以支撑工具化投入</li>
+      </ol>
+    </div>
+    <div class="arch">
+      <div class="a"><span class="no">STEP 01</span><h5>底层能力封装</h5><p>把已验证的规则检测、LLM Judge、异常识别分类、错误标签输出封装为内部能力单元，不重复造评测逻辑。</p></div>
+      <div class="a"><span class="no">STEP 02</span><h5>流程编排</h5><p>原始数据输入 → 规则层过滤 → LLM 层评测 → 风险分级标记，输出问题位置、错误类型与评测打分。</p></div>
+      <div class="a"><span class="no">STEP 03</span><h5>人工复核回流</h5><p>Agent 输出承接人工复核反馈，复核结果自动回流，更新案例库与规则库，形成数据飞轮。</p></div>
+      <div class="a"><span class="no">STEP 04</span><h5>自身效果监控</h5><p>跟踪 Agent 输出与人工终审的一致率，监控误判情况，保证自动化本身不失控。</p></div>
+    </div>
+    <div class="result-grid">
+      <div class="result"><div class="n">1000+</div><div class="l">单批自动质检数据量（千级）</div></div>
+      <div class="result"><div class="n o">75%</div><div class="l">人工评测工作量降低</div></div>
+      <div class="result"><div class="n">2-3天 → 0.5天</div><div class="l">单批评测周期缩短</div></div>
+      <div class="result"><div class="n o">一键</div><div class="l">评测报告自动生成</div></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节06 实战 ===== -->
+<section class="chap" id="c06">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no g">06</span>
+      <div>
+        <h2>实战案例：一次 Badcase 归因闭环</h2>
+        <div class="sub">情绪疗愈 AI 交互产品 · 从 50% 到 93.3% 的评测驱动迭代</div>
+      </div>
+    </div>
+    <div class="case">
+      <span class="tape"></span>
+      <div class="case-head">
+        <span class="sticker">CASE 01</span>
+        <span class="who">国风情绪向 AI 交互产品 · 2026.06-08</span>
+      </div>
+      <div class="case-steps">
+        <div class="case-step"><div class="n">1</div><div class="tx"><b>发现问题</b><span>上线初期 AI 定制成功率仅 50%，用户反馈集中在“答非所问”与“共情偏差”</span></div></div>
+        <div class="case-step"><div class="n o">2</div><div class="tx"><b>定位归因</b><span>设计 30+ 典型场景测试用例，建立多维度体验评估标准，将失败案例分类归因：模型幻觉、共情边界模糊、Prompt 策略缺陷</span></div></div>
+        <div class="case-step"><div class="n o">3</div><div class="tx"><b>策略输出</b><span>输出 Prompt 与交互策略优化方案：约束幻觉兜底、重构共情话术框架、补充边界规则</span></div></div>
+        <div class="case-step"><div class="n r">4</div><div class="tx"><b>效果验证</b><span>推动迭代上线，AI 定制成功率提升至 93.3%，幻觉兜底故障率降至 6.7%，形成“用户反馈-问题归因-策略优化-效果验证”完整闭环</span></div></div>
+      </div>
+      <div class="case-big">
+        <div class="b"><div class="n o">50% → 93.3%</div><div class="l">AI 定制成功率</div></div>
+        <div class="b"><div class="n">6.7%</div><div class="l">幻觉兜底故障率（降）</div></div>
+        <div class="b"><div class="n">30+</div><div class="l">典型场景测试用例</div></div>
+        <div class="b"><div class="n">从 0 到 1</div><div class="l">产品上线落地</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节07 多模型对标 ===== -->
+<section class="chap" id="c07">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no">07</span>
+      <div>
+        <h2>多模型对标评测</h2>
+        <div class="sub">字节跳动 XPERT 项目 · AI 模型训练师（线上）</div>
+      </div>
+    </div>
+    <div class="xpert">
+      <span class="tape"></span>
+      <div class="who">字节跳动 · XPERT 项目 · 2025.09-11 · 项目获最高评级</div>
+      <div class="xpert-grid">
+        <div class="xp"><h5>场景化 Prompt 设计</h5><p>面向文案创作、表格生成等业务场景，设计结构化 Prompt，搭建可复现的评测入口。</p></div>
+        <div class="xp"><h5>五级评分体系</h5><p>建立五级评分标准，对多模型输出做量化对照评测，交付成果一次性审核通过。</p></div>
+        <div class="xp"><h5>效果归因优化</h5><p>从指令遵循、风格一致性多维度标注输出，归类 Badcase、设计专项用例验证模型能力边界。</p></div>
+      </div>
+      <div class="score-line">
+        <div class="score"><span class="lab">指令遵循</span><div class="bar"><i style="width:92%"></i></div><span class="val">92%</span></div>
+        <div class="score"><span class="lab">风格一致性</span><div class="bar"><i style="width:86%"></i></div><span class="val">86%</span></div>
+        <div class="score"><span class="lab">交付通过率</span><div class="bar"><i style="width:100%"></i></div><span class="val">一次过</span></div>
+      </div>
+      <p style="font-size:12.5px;color:var(--ink2);margin-top:10px">* 评分维度为项目内真实评估维度；百分数为该维度达标水平的示意表达，用于展示评测框架而非绝对基准。</p>
+    </div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节08 成效 ===== -->
+<section class="chap" id="c08">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no g">08</span>
+      <div>
+        <h2>成效与收益评估</h2>
+        <div class="sub">从时间、成本、效率三个维度验证自动化评测的业务价值</div>
+      </div>
+    </div>
+    <div class="timeline">
+      <div class="tl-item">
+        <div class="t">2-4 周</div>
+        <div class="line"><i></i><b></b></div>
+        <div class="c"><b>基线梳理与规则沉淀</b><span>评测标准梳理、历史错误统计、初始规则库产出</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="t">4-8 周</div>
+        <div class="line"><i></i><b></b></div>
+        <div class="c"><b>Gold Set 与分层模块验证</b><span>标准数据集构建，规则 / LLM Judge 模块分别验证，统计真实覆盖率</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="t">6-12 周</div>
+        <div class="line"><i></i><b></b></div>
+        <div class="c"><b>试点上线与迭代调优</b><span>线上试点，人工复核反馈持续迭代，直到指标与收益达标</span></div>
+      </div>
+      <div class="tl-item">
+        <div class="t">2-4 周</div>
+        <div class="line"><i></i><b></b></div>
+        <div class="c"><b>Agent 封装开发</b><span>全部前置条件达成后，才投入工具化封装，整体周期 3-6 个月</span></div>
+      </div>
+    </div>
+    <div class="cost-compare">
+      <div class="cc">
+        <div class="who">人工评测（1245 条样本）</div>
+        <div class="big">141<span> 元</span></div>
+        <p>耗时约 2 天，含人工逐条标注与复核</p>
+      </div>
+      <div class="cc">
+        <div class="who">Agent 自动评测（DeepSeek API）</div>
+        <div class="big g">1-2<span> 元</span></div>
+        <p>模型调用成本，评测周期缩短至 0.5 天</p>
+      </div>
+      <div class="cc">
+        <div class="who">综合收益</div>
+        <div class="big o">4x / 75%</div>
+        <p>评测效率提升约 4 倍，人工评测时间降低 75%</p>
+      </div>
+    </div>
+    <div class="six">
+      <div class="s"><div class="k">质量</div><p>AI 与 Gold Set 一致率、准确率——AI 评得准不准</p></div>
+      <div class="s"><div class="k">效率</div><p>单条耗时、人力投入——有没有减少人工工作</p></div>
+      <div class="s"><div class="k">成本</div><p>单条成本、成本降低率——是否产生直接收益</p></div>
+      <div class="s"><div class="k">覆盖</div><p>评测覆盖率——从抽检走向全量</p></div>
+      <div class="s"><div class="k">稳定性</div><p>重复评测一致率——AI 结果是否稳定</p></div>
+      <div class="s"><div class="k">规模化</div><p>数据量扩大后的边际成本——越多越划算</p></div>
+    </div>
+  </div>
+  <div class="wrap"><div class="chap-divider"></div></div>
+</section>
+
+<!-- ===== 章节09 能力 ===== -->
+<section class="chap" id="c09">
+  <div class="wrap">
+    <div class="chap-head">
+      <span class="chap-no">09</span>
+      <div>
+        <h2>能力与工具</h2>
+        <div class="sub">评测方法论 × 产品思维 × 工程落地</div>
+      </div>
+    </div>
+    <div class="skills">
+      <span>场景化 Prompt 设计</span>
+      <span>Badcase 归因</span>
+      <span>大模型评测方法论</span>
+      <span>API 调用与部署</span>
+      <span>评测数据集设计</span>
+      <span>数据标注质检</span>
+      <span>SQL</span>
+    </div>
+    <div class="skill-group">
+      <div class="sg"><h5>核心能力</h5><p>评测体系搭建与指标定义 · Badcase 根因分析与收敛 · 自动化评测链路设计 · Gold Set 建设 · 多模型对标 · 量化驱动迭代</p></div>
+      <div class="sg"><h5>常用工具</h5><p>ChatGPT / DeepSeek / Dify / Coze · 墨刀 / Figma · Notion · SQL · Python（基础）</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== Footer ===== -->
+<footer>
+  <div class="foot-inner">
+    <div class="line">用评测数据说话，用闭环推动迭代。</div>
+    <div class="contacts">
+      <span><svg viewBox="0 0 24 24"><path d="M4 5h16v14H4z"/><path d="M4 6l8 7 8-7"/></svg>18199157634</span>
+      <span><svg viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>ruonan_xie@163.com</span>
+      <span><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3c3 3.5 3 14 0 18-3-4-3-14.5 0-18z"/></svg>bugjun.cloud</span>
+    </div>
+    <div class="tail">AI 模型评测作品集 · 2027 届 · 基于《自动化质量评测方案 V3.0》整理补充</div>
+  </div>
+</footer>
+
+<script>
+// 滚动揭示
+(function(){
+  var els=document.querySelectorAll('.rv');
+  if(!('IntersectionObserver' in window)){els.forEach(function(e){e.classList.add('on')});return}
+  var io=new IntersectionObserver(function(entries){
+    entries.forEach(function(en){if(en.isIntersecting){en.target.classList.add('on');io.unobserve(en.target)}});
+  },{threshold:.08});
+  els.forEach(function(e){io.observe(e)});
+})();
+</script>
+</body>
+</html>
